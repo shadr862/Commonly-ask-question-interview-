@@ -1,0 +1,36 @@
+1.Firstly we have to create a file app.js
+
+2.Inside File:Console.log("Docker Header");
+
+3.For running the File in terminal:node file-name
+
+4.Create DockerFile and Inside DockerFile:
+
+Docker Code:
+
+FROM node:alpine
+COPY ./app
+WORKDIR /app
+CMD node app.js
+
+5.For building the docker as hello-docker:docker build -t hello-docker . [dot used as current file path]
+
+6.For viewing Docker Image:docker image/images ls
+
+7.For running Docker:docker run hello-docker
+
+8.pushing docker inn docker hub:
+
+docker logout
+docker login
+docker build -t hello-docker .
+docker tag hello-docker shadr862/hello-docker:v1
+docker push shadr862/hello-docker:v1
+
+9. for play with docker:
+  -longin
+  -docker version
+  -docker pull shadr862/hello-docker
+  -docker image ls
+  -docker run hadr862/hello-docker
+

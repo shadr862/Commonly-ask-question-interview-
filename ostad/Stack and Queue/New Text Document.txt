@@ -1,0 +1,8 @@
+https://leetcode.com/problems/valid-parentheses/description/
+https://www.interviewbit.com/problems/redundant-braces/
+https://leetcode.com/problems/implement-queue-using-stacks/description/
+https://leetcode.com/problems/implement-stack-using-queues/description/
+https://leetcode.com/problems/min-stack/description/
+https://leetcode.com/problems/largest-rectangle-in-histogram/description/
+https://leetcode.com/problems/trapping-rain-water/submissions/1155530062/
+https://leetcode.com/problems/number-of-recent-calls/submissions/1379589795/

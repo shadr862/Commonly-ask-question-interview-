@@ -1,0 +1,8 @@
+https://www.interviewbit.com/problems/meeting-rooms/
+https://www.interviewbit.com/problems/hotel-bookings-possible/
+https://leetcode.com/problems/smallest-range-ii/description/
+https://leetcode.com/problems/minimum-number-of-flips-to-make-binary-grid-palindromic-ii/description/
+https://leetcode.com/problems/count-almost-equal-pairs-ii/submissions/1458245648/
+https://leetcode.com/problems/minimum-amount-of-damage-dealt-to-bob/description/
+https://leetcode.com/problems/reach-end-of-array-with-max-score/submissions/1459790576/
+https://www.interviewbit.com/courses/programming/greedy-algorithm/

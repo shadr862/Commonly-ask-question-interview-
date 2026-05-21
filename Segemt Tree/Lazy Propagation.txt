@@ -1,0 +1,69 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 1e5;
+long long seg[4*N], lazy[4*N];
+int arr[N];
+
+// Build the segment tree
+void build(int idx, int low, int high) {
+    if (low == high) {
+        seg[idx] = arr[low];
+        return;
+    }
+    int mid = (low + high) / 2;
+    build(2*idx+1, low, mid);
+    build(2*idx+2, mid+1, high);
+    seg[idx] = seg[2*idx+1] + seg[2*idx+2];
+}
+
+// Propagate lazy values
+void propagate(int idx, int low, int high) {
+    if (lazy[idx] != 0) {
+        seg[idx] += (high - low + 1) * lazy[idx]; // Apply pending update
+        if (low != high) { // Not a leaf node
+            lazy[2*idx+1] += lazy[idx];
+            lazy[2*idx+2] += lazy[idx];
+        }
+        lazy[idx] = 0; // Clear lazy value
+    }
+}
+
+// Range update
+void updateRange(int idx, int low, int high, int l, int r, int val) {
+    propagate(idx, low, high);
+    if (high < l || low > r) return; // No overlap
+    if (low >= l && high <= r) {     // Total overlap
+        seg[idx] += (high - low + 1) * val;
+        if (low != high) {
+            lazy[2*idx+1] += val;
+            lazy[2*idx+2] += val;
+        }
+        return;
+    }
+    int mid = (low + high) / 2;
+    updateRange(2*idx+1, low, mid, l, r, val);
+    updateRange(2*idx+2, mid+1, high, l, r, val);
+    seg[idx] = seg[2*idx+1] + seg[2*idx+2];
+}
+
+// Range query
+long long queryRange(int idx, int low, int high, int l, int r) {
+    propagate(idx, low, high);
+    if (high < l || low > r) return 0; // No overlap
+    if (low >= l && high <= r) return seg[idx]; // Total overlap
+
+    int mid = (low + high) / 2;
+    return queryRange(2*idx+1, low, mid, l, r)
+         + queryRange(2*idx+2, mid+1, high, l, r);
+}
+
+int main() {
+    int n = 6;
+    int a[] = {1, 3, 5, 7, 9, 11};
+    for (int i = 0; i < n; i++) arr[i] = a[i];
+
+    build(0, 0, n-1);
+    updateRange(0, 0, n-1, 1, 3, 10); // add 10 to [1,3]
+    cout << queryRange(0, 0, n-1, 1, 3) << endl; // Query [1,3]
+}

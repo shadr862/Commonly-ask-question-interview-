@@ -1,0 +1,90 @@
+For getting linux:docker run ubuntu ->linux is case sensitive
+
+1.list all containers in system:docker ps -a
+
+2.run docker in interactive mode in terminal:docker run  -it ubuntu
+
+3.echo simply prints whatever you type:echo hello
+
+4.who is using:whoami
+
+5.For the location of shell program:echo $0
+
+6.using history: history
+    1  echo hello
+    2  whoami
+    3  echo $o
+    4 echo $0
+    5  history
+7. For using any of command in history:!2
+
+8.Advance Package Tool:apt
+
+9.As we donot have all package for intall nano as Editor.We have update apt for finding all package.
+
+10.apt update
+
+11.see all package:apt list
+
+12. For install nano as Editor: apt install nano
+
+13.For removeing nano:apt remove nano->test for python install and remove
+
+14.present working file system directory:pwd
+
+15.ls for viewing all directory horizontally
+
+16.ls -1 for verticaly
+
+17.For more details: ls -l
+
+18.accessing directory cd
+
+19.For back previous dir: cd /..
+
+20.short cut going home: cd ~
+
+21.create dir:mkdir test
+
+22.rename test to docker:mv test docker 
+
+23.moving to dir:cd docker/
+
+24.create new file:touch file.txt
+
+25.Create multiple file:touch file1.txt file2.txt file3.txt
+
+26.removing a word in cmd:ctr+w
+
+27.remove file:rm file1.txt
+
+28:remove using pattern: rm file*
+
+29.remove directory: rm -r docker/
+
+30.cache claer:clear
+
+31.Create and edit File using nano:nano file
+
+32.cat for view file:cat file
+
+33.more for view large txt file with down scorlling->space for down scorlling
+
+--we have to install less--apt install less
+
+34.less for view large txt file with  up and down scorlling->arrow of keyboard for up and down scroll and entir for single line.q for exit.
+
+35.head -n 5 file.txt
+
+36.tail -n 5 file.txt
+
+37.Read one file1 and write exactly same what was in file in new file1:cat file1.txt > file2.txt
+
+38.concate and and copy it another file: cat file1.txt file2.txt >combined.txt
+
+39.we do it for single line using echo:echo hello >file3.txt
+
+
+
+
+

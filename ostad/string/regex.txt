@@ -1,0 +1,44 @@
+email regex:
+
+std::regex pattern(R"(^[A-Za-z0-9._%+-]{7,}@[A-Za-z0-9.-]{5,}\.[A-Za-z]{2,}$)");
+
+phone regex:
+
+std::regex pattern(R"(^\+880(\17|\13|\19|\14|\18|\15)[0-9]{8}$)");
+
+1. Escape regex special characters if you want them literally
+
+These characters have special meaning in regex:
+
+. ^ $ * + ? ( ) [ ] { } | \
+
+
+If you want to match the actual character, you must escape it with \.
+
+Character	Special meaning		Literal example
+.		Any character		\. matches a dot .
+^		Start of string		\^ matches caret ^
+$		End of string		\$ matches dollar sign $
+*		0 or more		\* matches a star *
++		1 or more		\+ matches plus +
+?		Optional		\? matches question mark ?
+( )		Grouping		\( matches (
+[ ]		Character class		\[ matches [
+{ }		Quantifier		\{ matches {
+`	`	OR
+\		Escape itself		\\ matches a backslash
+
+2. Escape shorthand sequences when you want them literally
+
+Some sequences starting with \ have special meaning in regex:
+
+Sequence	Meaning
+\d	 	digit [0-9]
+\D		non-digit
+\w		word char [A-Za-z0-9_]
+\W		non-word char
+\s		whitespace
+\S		non-whitespace
+\b		word boundary
+\B		non-word boundary
+

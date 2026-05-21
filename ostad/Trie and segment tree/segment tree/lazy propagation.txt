@@ -1,0 +1,166 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class SegmentTree{
+private:
+    int n;
+    vector<int> tree,lazy;
+
+    void build(int node,int l,int r,vector<int> &v)
+    {
+        if(l==r)
+        {
+            tree[node]=v[l];
+            return ;
+        }
+
+        int mid=(l+r)/2;
+        int left=node*2+1;
+        int right=node*2+2;
+
+        build(left,l,mid,v);
+        build(right,mid+1,r,v);
+
+        tree[node]=tree[left]+tree[right];
+
+    }
+
+    void update(int node,int l,int r,int i,int val)
+    {
+        if(i<l || i>r)
+        {
+            return ;
+        }
+
+        if(l==r && i==l)
+        {
+            tree[node]=val;
+            return ;
+        }
+
+        int mid=(l+r)/2;
+        int left=node*2+1;
+        int right=node*2+2;
+
+        update(left,l,mid,i,val);
+        update(right,mid+1,r,i,val);
+
+        tree[node]=tree[left]+tree[right];
+    }
+
+    void propagate(int node,int l,int r)
+    {
+        if(lazy[node]!=0)
+        {
+            tree[node]+=(r-l+1)*lazy[node];
+
+            if(l!=r)
+            {
+                int left=node*2+1;
+                int right=node*2+2;
+                lazy[left]+=lazy[node];
+                lazy[right]+=lazy[node];
+            }
+
+            lazy[node]=0;
+        }
+    }
+
+    void rangeUpdate(int node, int start, int end, int l, int r, int value)
+    {
+        propagate(node, l , r);
+
+        if(l>r || start>r || end<l)
+        {
+            return ;
+        }
+
+        if(start<=l && end>=r)
+        {
+            tree[node]+=(r-l+1)*value;
+
+            if(l!=r)
+            {
+                int left=node*2+1;
+                int right=node*2+2;
+                lazy[left]+=value;
+                lazy[right]+=value;
+            }
+
+            return ;
+        }
+
+        int mid=(l+r)/2;
+        int left=node*2+1;
+        int right=node*2+2;
+
+        rangeUpdate(left,start,end,l,mid,value);
+        rangeUpdate(right,start,end,mid+1,r,value);
+
+        tree[node]=tree[left]+tree[right];
+    }
+
+    int rangeQuery(int node, int start, int end, int l, int r)
+    {
+        propagate(node,l,r);
+
+        if(l>r || start>r || end<l)
+        {
+            return 0;
+        }
+
+        if(start<=l && end>=r)
+        {
+            return tree[node];
+        }
+
+        int mid=(l+r)/2;
+        int left=node*2+1;
+        int right=node*2+2;
+
+        int p1=rangeQuery(left,start,end,l,mid);
+        int p2=rangeQuery(right,start,end,mid+1,r);
+
+        return p1+p2;
+    }
+
+   public:
+
+      SegmentTree(vector<int>& arr)
+      {
+        n = arr.size();
+        tree.resize(4 * n);  // Allocate memory for the segment tree
+        lazy.resize(4 * n, 0);  // Allocate memory for the lazy array (initialize to 0)
+        build(0, 0, n - 1,arr);  // Build the segment tree
+      }
+
+      void rangeUpdate(int l, int r, int value)
+      {
+        rangeUpdate(0,l, r,0, n - 1,value);
+      }
+
+     // Public range query function (wrapper)
+     int rangeQuery(int l, int r)
+     {
+        return rangeQuery(0, l, r,0, n - 1);
+     }
+};
+
+int main()
+{
+	vector<int> arr = {1, 3, 5, 7, 9, 11};  // Initial array
+    SegmentTree segTree(arr);  // Build the segment tree
+
+    // Range query for sum in range [1, 3]
+    cout << "Sum in range [1, 3]: " << segTree.rangeQuery(1, 3) << endl;
+
+    // Range update: add 3 to all elements in range [1, 4]
+    segTree.rangeUpdate(1, 4, 3);
+
+    // Range query for sum in range [1, 3] after the update
+    cout << "Sum in range [1, 3] after update: " << segTree.rangeQuery(1, 3) << endl;
+
+    return 0;
+}
+
+
